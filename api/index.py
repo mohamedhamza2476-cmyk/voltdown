@@ -34,5 +34,8 @@ def proxy_download():
         for chunk in req.iter_content(chunk_size=1024*1024): yield chunk
     return Response(generate(), headers={"Content-Type": "application/octet-stream", "Content-Disposition": f"attachment; filename*=UTF-8''{quote(filename)}"})
 
-# ده السطر المهم لـ Vercel
+# بدلاً من app.run()، بنسيب app بس عشان Vercel يشوفه
 app.debug = True
+
+# لازم نتأكد إننا بنصدر الـ app كمتغير رئيسي
+application = app
